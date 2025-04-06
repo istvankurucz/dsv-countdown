@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200,0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+:root {
+	/* Colors */
+	--bg-color: #192862;
+	--bg-color-light: hsl(from var(--color) h s l / 0.1);
+	--color: white;
+
+	/* Border-radius */
+	--br: 0.5rem;
+}
+
+body {
+	min-height: 100svh;
+	display: grid;
+	place-items: center;
+	font-family: "Poppins", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	color: var(--color);
+	background-color: var(--bg-color);
+}
+
+.main {
+	display: flex;
+	flex-direction: column;
+	gap: 3.5rem;
+	align-items: center;
+	padding: 0.5rem;
+}
+
+/* #region Logo */
+.logo {
+	width: 6rem;
+	height: 6rem;
+	display: grid;
+	place-items: center;
+	background-color: var(--bg-color-light);
+	border-radius: var(--br);
+}
+
+.logo__img {
+	width: 5rem;
+	height: 5rem;
+}
+/* #endregion */
+
+.main__countdown {
+	display: flex;
+	flex-direction: column;
+	gap: 4rem;
+	align-items: center;
+}
+
+.p {
+	font-size: 1.25rem;
+	opacity: 0.9;
+}
+
+/* #region Countdown */
+.countdown {
+	display: flex;
+	gap: 2rem;
+	align-items: center;
+}
+
+.countdown__row {
+	display: flex;
+	gap: 3rem;
+}
+.countdown__row--bottom {
+	gap: 2rem;
+}
+/* #endregion */
+
+.divider {
+	display: inline-block;
+	height: 5rem;
+	width: 0.1rem;
+	background-color: var(--bg-color-light);
+}
+
+/* #region Box */
+.box {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	align-items: center;
+}
+
+.box__value {
+	font-size: 4.5rem;
+	font-weight: 700;
+}
+
+.box__label {
+	font-size: 0.6rem;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	opacity: 0.6;
+}
+/* #endregion */
+
+.celebration__p {
+	--height: 0.25rem;
+	--dx: 1.5rem;
+	--dy: 0.5rem;
+
+	display: none;
+	font-size: 3rem;
+	font-weight: 700;
+	position: relative;
+}
+.celebration__p--show {
+	display: block;
+}
+.celebration__p::before {
+	content: "";
+	height: var(--height);
+	background-color: var(--bg-color-light);
+	position: absolute;
+	top: calc(-1 * var(--dy));
+	left: calc(-1 * var(--dx));
+	right: calc(-1 * var(--dx));
+}
+.celebration__p::after {
+	content: "";
+	height: var(--height);
+	background-color: var(--bg-color-light);
+	position: absolute;
+	bottom: calc(-1 * var(--dy));
+	left: calc(-1 * var(--dx));
+	right: calc(-1 * var(--dx));
+}
+
+@media screen and (max-width: 550px) {
+	.countdown {
+		flex-direction: column;
+	}
+
+	.divider {
+		display: none;
+	}
+}
