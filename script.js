@@ -30,6 +30,27 @@ function updateCountdownValues({ weeks, days, hours, minutes, seconds }) {
 	minutesElement.textContent = minutes;
 	secondsElement.textContent = seconds;
 }
+
+function updateCountdown() {
+	// Get diff
+	const now = new Date();
+	const diff = goalDate.getTime() - now.getTime();
+
+	// Check goal date
+	if (diff <= 0) {
+		updateCountdownValues({ weeks: "0", days: "0", hours: "00", minutes: "00", seconds: "00" });
+		celebrationElement.classList.add("celebration__p--show");
+		if (intervalId) clearInterval(intervalId);
+		return;
+	}
+
+	// Calculate values
+	const values = calculateCountdownValues(diff);
+	const formattedValues = formatCountdownValues(values);
+
+	// Update DOM elements
+	updateCountdownValues(formattedValues);
+}
 //#endregion
 
 //#region DOM elements
@@ -42,25 +63,12 @@ const celebrationElement = document.querySelector(".celebration__p");
 //#endregion
 
 // #region Main
+// Set goal date
 const goalDate = new Date(2025, 3, 14, 8, 0, 0);
 
-const intervalId = setInterval(() => {
-	// Get diff
-	const now = new Date();
-	const diff = goalDate.getTime() - now.getTime();
+// Update countdown on load
+updateCountdown();
 
-	if (diff <= 0) {
-		updateCountdownValues({ weeks: "0", days: "0", hours: "00", minutes: "00", seconds: "00" });
-		celebrationElement.classList.add("celebration__p--show");
-		clearInterval(intervalId);
-		return;
-	}
-
-	// Calculate values
-	const values = calculateCountdownValues(diff);
-	const formattedValues = formatCountdownValues(values);
-
-	// Update DOM elements
-	updateCountdownValues(formattedValues);
-}, 1000);
+// Update countdown after every second
+const intervalId = setInterval(updateCountdown, 1000);
 //#endregion
